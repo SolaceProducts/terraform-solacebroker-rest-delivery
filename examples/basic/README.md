@@ -1,27 +1,37 @@
-# Connection Factory Example
+# Basic REST Delivery Configuration Example
 
-Configuration in this directory creates a [connection factory](https://docs.solace.com/API/Solace-JMS-API/Connection-Factories.htm) object in the JNDI store on the PubSub+ event broker, leveraging the JNDI Terraform module.
+Configuration in this directory creates a [connection factory](https://docs.solace.com/API/Solace-JMS-API/Connection-Factories.htm) object in the JNDI store on the PubSub+ event broker, leveraging the Rest Delivery Terraform module.
 
 ## Module Configuration in the Example
 
 ### Mandatory Inputs
 
 * `msg_vpn_name` - set to `default` in the example
-* `connection_factory_name` - set to `/JNDI/CF/GettingStarted` in the example
+* `rest_delivery_point_name`
+* `url` - set to `https://example.com/test` in the example. Note that it includes the endpoint path
+* `queue_name` - the name of an existing queue to bind to
+
+Important: The REST delivery point must have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to `#rdp/<rest_delivery_point_name>` or the queue’s permissions for non-owner clients must be set to at least `consume` level access. Queue ingress and egress must also be enabled.
 
 ### Optional Inputs
 
 Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_queue"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_queue#optional).
 
+The module default for the `enabled` variable is true, which enables both the RDP and the REST consumer resources.
+
 ### Output
 
-The module `provisioned_connection_factory` output refers to the created connection factory.
+The module `rdp` output refers to the created REST delivery point.
 
 ## Created resources
 
 This example will create following resources:
 
-* `solacebroker_msg_vpn_jndi_connection_factory`
+* `solacebroker_msg_vpn_queue` (created before the module, as pre-requisite)
+</br></br>
+* `solacebroker_msg_vpn_rest_delivery_point`
+* `solacebroker_msg_vpn_rest_delivery_point_rest_consumer`
+* `solacebroker_msg_vpn_rest_delivery_point_queue_binding`
 
 ## Running the Example
 
@@ -34,7 +44,7 @@ If you don't already have access to a broker, refer to the [Developers page](htt
 The sample is available from the module GitHub repo:
 
 ```bash
-git clone https://github.com/SolaceProducts/terraform-solacebroker-jndi.git
+git clone https://github.com/SolaceProducts/terraform-solacebroker-rest-delivery.git
 cd examples/basic
 ```
 
@@ -58,4 +68,4 @@ Run `terraform destroy` to clean up created resources when no longer needed.
 
 ## Additional Documentation
 
-Refer to the [Connection Factories](https://docs.solace.com/API/Solace-JMS-API/Connection-Factories.htm) section in the PubSub+ documentation.
+Refer to the [Managing REST Delivery Points](https://docs.solace.com/Services/Managing-RDPs.htm) section in the PubSub+ documentation.
