@@ -10,6 +10,7 @@ locals {
 resource "solacebroker_msg_vpn_rest_delivery_point" "main" {
   msg_vpn_name             = var.msg_vpn_name
   rest_delivery_point_name = var.rest_delivery_point_name
+  enabled                  = var.enabled
 
   #AutoAddAttributes #EnableCommonVariables
 }
@@ -19,6 +20,9 @@ resource "solacebroker_msg_vpn_rest_delivery_point_rest_consumer" "main" {
   rest_delivery_point_name                         = solacebroker_msg_vpn_rest_delivery_point.main.rest_delivery_point_name
   enabled                                          = solacebroker_msg_vpn_rest_delivery_point.main.enabled
   rest_consumer_name                               = var.rest_consumer_name != null ? var.rest_consumer_name : "consumer"
+  remote_host                                      = local.host
+  remote_port                                      = local.port
+  tls_enabled                                      = local.tls
 
   #AutoAddAttributes #EnableCommonVariables
 }
@@ -34,7 +38,7 @@ resource "solacebroker_msg_vpn_rest_delivery_point_queue_binding" "main" {
 
 resource "solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header" "main" {
 
-  for_each = {for v in var.request_header : v.header_name => v}
+  for_each = {for v in var.request_headers : v.header_name => v}
 
   msg_vpn_name             = solacebroker_msg_vpn_rest_delivery_point.main.msg_vpn_name
   rest_delivery_point_name = solacebroker_msg_vpn_rest_delivery_point.main.rest_delivery_point_name
@@ -45,7 +49,7 @@ resource "solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header"
 }
 
 resource "solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim" "main" {
-  for_each = {for v in var.oauth_jwt_claim : v.oauth_jwt_claim_name => v}
+  for_each = {for v in var.oauth_jwt_claims : v.oauth_jwt_claim_name => v}
 
   msg_vpn_name             = solacebroker_msg_vpn_rest_delivery_point.main.msg_vpn_name
   rest_delivery_point_name = solacebroker_msg_vpn_rest_delivery_point.main.rest_delivery_point_name

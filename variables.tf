@@ -2,31 +2,37 @@
 
 # Required variables
 
-variable "url" {
-  description = "The URL that the messages should be delivered to. The path portion of the URL may contain substitution expressions, unless `."
-  type        = string
-}
-
 variable "msg_vpn_name" {
   description = "The name of the Message VPN"
   type        = string
 }
 
-variable "rest_delivery_point_name" {
+variable "url" {
+  description = "The URL that the messages should be delivered to. The path portion of the URL may contain substitution expressions"
   type        = string
-  description = "The name of the REST Delivery Point."
+}
+
+variable "rest_delivery_point_name" {
+  description = "The name of the REST Delivery Point"
+  type        = string
 }
 
 variable "queue_name" {
+  description = "The name of the queue to bind to. The REST Delivery Point must have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to #rdp/<rdp-name> or the queue’s permissions for non-owner clients must be set to at least `consume` level access"
   type        = string
-  description = "The name of the queue to bind to. The REST Delivery Point must also have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to #rdp/<rdp-name> or the queue’s permissions for non-owner clients must be set to at least `consume` level access."
 }
 
 # Optional variables
 
+variable "enabled" {
+  description = "Enable or disable the REST Delivery Point."
+  type        = bool
+  default     = null
+}
+
 variable "rest_consumer_name" {
+  description = "The name of the REST Consumer"
   type        = string
-  description = "The name of the REST Consumer."
   default     = null
 }
 
@@ -157,12 +163,6 @@ variable "client_profile_name" {
   default     = null
 }
 
-variable "enabled" {
-  description = "Enable or disable the REST Delivery Point."
-  type        = bool
-  default     = null
-}
-
 variable "gateway_replace_target_authority_enabled" {
   description = "Enable or disable whether the authority for the request-target is replaced with that configured for the REST Consumer remote."
   type        = bool
@@ -199,18 +199,6 @@ variable "proxy_name" {
   default     = null
 }
 
-variable "remote_host" {
-  description = "The IP address or DNS name to which the broker is to connect to deliver messages for the REST Consumer."
-  type        = string
-  default     = null
-}
-
-variable "remote_port" {
-  description = "The port associated with the host of the REST Consumer."
-  type        = number
-  default     = null
-}
-
 variable "request_target_evaluation" {
   description = "The type of evaluation to perform on the request target."
   type        = string
@@ -235,12 +223,6 @@ variable "tls_cipher_suite_list" {
   default     = null
 }
 
-variable "tls_enabled" {
-  description = "Enable or disable encryption (TLS) for the REST Consumer."
-  type        = bool
-  default     = null
-}
-
 variable "vendor" {
   description = "The name of the vendor that this REST Delivery Point connects to."
   type        = string
@@ -248,21 +230,21 @@ variable "vendor" {
 }
 
 
-variable "request_header" {
+variable "request_headers" {
+  description = "Request headers to be added to the HTTP request"
   type = set(object({
     header_name  = string
     header_value = optional(string)
   }))
-  description = "A request header to be added to the HTTP request."
-  default     = []
+  default = []
 }
 
-variable "oauth_jwt_claim" {
+variable "oauth_jwt_claims" {
+  description = "Additional claims to be added to the JWT sent to the OAuth token request endpoint"
   type = set(object({
     oauth_jwt_claim_name  = string
     oauth_jwt_claim_value = string
   }))
-  description = "A Claim is added to the JWT sent to the OAuth token request endpoint."
-  default     = []
+  default = []
 }
 

@@ -1,13 +1,21 @@
 # Output variable definitions
 
 output "rest_delivery_point" {
-  value       = solacebroker_msg_vpn_rest_delivery_point.main
+  value       = try(solacebroker_msg_vpn_rest_delivery_point.main, null)
 }
 
 output "rest_consumer" {
-  value       = solacebroker_msg_vpn_rest_delivery_point_rest_consumer.main
+  value       = try(solacebroker_msg_vpn_rest_delivery_point_rest_consumer.main, null)
 }
 
 output "queue_binding" {
-  value       = solacebroker_msg_vpn_rest_delivery_point_queue_binding.main
+  value       = try(solacebroker_msg_vpn_rest_delivery_point_queue_binding.main, null)
+}
+
+output "request_headers" {
+  value       = try(solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header.main, null)
+}
+
+output "oauth_jwt_claims" {
+  value       = try(solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim.main, null)
 }
