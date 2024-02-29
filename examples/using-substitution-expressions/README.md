@@ -1,6 +1,14 @@
-# Basic REST Delivery Configuration Example
+# Using Substitution Expressions in REST Delivery Configuration Example
 
-Configuration in this directory creates a [REST delivery point and child objects](https://docs.solace.com/API/REST/REST-Consumers.htm#_Toc433874658) on the PubSub+ event broker, with minimum configuration, leveraging the Rest Delivery Terraform module.
+Configuration in this directory creates a [REST delivery point and child objects](https://docs.solace.com/API/REST/REST-Consumers.htm#_Toc433874658) on the PubSub+ event broker, leveraging the Rest Delivery Terraform module.
+
+It demonstrates the use of [substitution expressions](https://docs.solace.com/Messaging/Substitution-Expressions-Overview.htm) for flexible REST requests.
+
+Substitution expressions may be used in
+* Request URI path component
+* Request headers
+
+Strings containing substitution expressions must be [properly escaped](https://developer.hashicorp.com/terraform/language/expressions/strings#escape-sequences) in the Terraform configuration. 
 
 ## Module Configuration in the Example
 
@@ -8,12 +16,14 @@ Configuration in this directory creates a [REST delivery point and child objects
 
 * `msg_vpn_name` - set to `default` in the example
 * `rest_delivery_point_name`
-* `url` - set to `https://example.com/test` in the example. Note that it includes the endpoint path
+* `url` - set to `http://example.com/$${msgId()}` in the example. Notice the escape sequence, which results in `${msgId()` configured on the broker.
 * `queue_name` - `rdp_queue`, the queue that has been created to be used with the RDP
 
 Important: The REST delivery point must have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to `#rdp/<rest_delivery_point_name>` or the queue’s permissions for non-owner clients must be set to at least `consume` level access. Queue ingress and egress must also be enabled.
 
 ### Optional Inputs
+
+* `request_headers` - here `{ header_name  = "header1", header_value = "$${uuid()}" }`, notice again the use of the escape sequence.
 
 Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_queue"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_queue#optional).
 

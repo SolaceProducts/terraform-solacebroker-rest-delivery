@@ -6,7 +6,7 @@ provider "solacebroker" {
 
 resource "solacebroker_msg_vpn_queue" "myqueue" {
   msg_vpn_name = "default"
-  queue_name   = "my_queue"
+  queue_name   = "rdp_queue"
   permission   = "consume"
 }
 

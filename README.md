@@ -66,7 +66,7 @@ Refer to the following configuration examples:
 
 - [Basic](examples/basic)
 - [Substitution Expressions](examples/using-substitution-expressions)
-- [Adding protected headers](examples/adding-protected-headers)
+- [Adding headers](examples/adding-headers)
 - [Multiple queue bindings](examples/multiple-queue-bindings)
 - [Adding JWT claims (workaround)](examples/adding-oauth-jwt-claims-workaround)
 - [Amazon AWS consumer](examples/aws)

@@ -35,9 +35,15 @@ module "testrdp" {
   
   msg_vpn_name            = "default"
   rest_delivery_point_name = "basic_rdp"
-  url                     = "https://example.com/test"
+  url                     = "http://example.com/$${msgId()}"
   # queue_name              = module.rdp_queue.queue.queue_name
   queue_name              = solacebroker_msg_vpn_queue.rdp_queue.queue_name
+  request_headers = [
+    {
+      header_name  = "header1"
+      header_value = "$${uuid()}"
+    }
+  ]
 }
 
 output "rdp" {
