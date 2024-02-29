@@ -33,6 +33,7 @@ Additional optional module variables names are the same as the underlying resour
 |[solacebroker_msg_vpn_rest_delivery_point_rest_consumer](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_rest_consumer#optional)|
 |[solacebroker_msg_vpn_rest_delivery_point_queue_binding](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_queue_binding#optional)|
 |[solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_queue_binding_request_header#optional)|
+|[solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_queue_binding_protected_request_header#optional)|
 |[solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim#optional)|
 
 Most optional variables' default value is `null`, meaning that if not provided then the resource default value will be provisioned on the broker.
@@ -42,6 +43,8 @@ Most optional variables' default value is `null`, meaning that if not provided t
 ## Module outputs
 
 [Module outputs](https://developer.hashicorp.com/terraform/language/values/outputs) provide reference to created resources. Any reference to a resource that has not been created will be set to `(null)`.
+
+Note that the "rest consumer" and the "protected request headers" outputs are [sensitive](https://developer.hashicorp.com/terraform/language/values/outputs#sensitive-suppressing-values-in-cli-output).
 
 ## Providers
 
@@ -59,6 +62,7 @@ The following table shows the resources created. "X" denotes a resource always c
 | solacebroker_msg_vpn_rest_delivery_point_rest_consumer | X |
 | solacebroker_msg_vpn_rest_delivery_point_queue_binding | X |
 | solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header | O |
+| solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header | O |
 | solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim | O |
 
 ## Examples
@@ -68,8 +72,8 @@ Refer to the following configuration examples:
 - [Basic](examples/basic)
 - [Substitution Expressions](examples/using-substitution-expressions)
 - [Adding headers](examples/adding-headers)
-- [Multiple queue bindings](examples/multiple-queue-bindings)
 - [Adding JWT claims (workaround)](examples/adding-oauth-jwt-claims-workaround)
+- [Multiple queue bindings](examples/multiple-queue-bindings)
 - [Amazon AWS consumer](examples/aws)
 - [Microsoft Azure consumer](examples/azure)
 - [Google Cloud consumer](examples/gcp)

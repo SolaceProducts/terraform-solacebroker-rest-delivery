@@ -1,14 +1,15 @@
-# Using Substitution Expressions in REST Delivery Configuration Example
+# Adding REST Request Headers in REST Delivery Configuration Example
 
-Configuration in this directory creates a [REST delivery point and child objects](https://docs.solace.com/API/REST/REST-Consumers.htm#_Toc433874658) on the PubSub+ event broker, leveraging the Rest Delivery Terraform module.
+Configuration in this directory demonstrates how to specify [request headers](https://docs.solace.com/Services/Managing-RDPs.htm#configuring-request-headers) when configuring [REST messaging](https://docs.solace.com/API/REST/REST-Consumers.htm) on the PubSub+ event broker, leveraging the Rest Delivery Terraform module.
 
-It demonstrates the use of [substitution expressions](https://docs.solace.com/Messaging/Substitution-Expressions-Overview.htm) for flexible REST requests.
+There are two types of request header resources:
 
-Substitution expressions may be used in the
-* Request URI path component
-* Request headers
+* "Request headers" - HTTP headers that don't contain sensitive data
+* "Protected request headers" - their value contain sensitive data and must be handled accordingly
 
-Strings containing substitution expressions must be [properly escaped](https://developer.hashicorp.com/terraform/language/expressions/strings#escape-sequences) in the Terraform configuration. 
+The REST Delivery module supports a set of "Request headers" and "Protected request headers" to be passed as input variables.
+
+The example shows setting the sensitive `protected_request_headers` variable with a `.tfvars` file, as described in the [Protect sensitive input variables](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables#set-values-with-a-tfvars-file) Terraform tutorial.
 
 ## Module Configuration in the Example
 
@@ -16,16 +17,15 @@ Strings containing substitution expressions must be [properly escaped](https://d
 
 * `msg_vpn_name` - set to `default` in the example
 * `rest_delivery_point_name`
-* `url` - set to `http://example.com/$${msgId()}` in the example. Notice the escape sequence, which results in `${msgId()` configured on the broker. Substitution expressions are only suported in the path component.
+* `url` - set to `https://example.com/test` in the example.
 * `queue_name` - `rdp_queue`, the queue that has been created to be used with the RDP
 
 Important: The REST delivery point must have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to `#rdp/<rest_delivery_point_name>` or the queue’s permissions for non-owner clients must be set to at least `consume` level access. Queue ingress and egress must also be enabled.
 
 ### Optional Inputs
 
-* `request_headers` - here `{ header_name  = "header1", header_value = "$${uuid()}" }`, notice again the use of the escape sequence.
-
-Note that substitution expressions are not supported for `protected_request_headers`.
+* `request_headers` - provided as a set of objects in the example. Also check the [using-substitution-expressions](/examples/using-substitution-expressions) example for additional samples.
+* `protected_request_headers` - provided as a set of objects in the example
 
 Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_queue"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_queue#optional).
 
@@ -72,8 +72,8 @@ Execute from this folder:
 
 ```bash
 terraform init
-terraform plan
-terraform apply
+terraform plan -var-file="secret.tfvars"
+terraform apply -var-file="secret.tfvars"
 ```
 
 Run `terraform destroy` to clean up created resources when no longer needed.
