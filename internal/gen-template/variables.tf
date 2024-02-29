@@ -40,28 +40,28 @@ variable "rest_consumer_name" {
 
 variable "request_headers" {
   description = "Request headers to be added to the HTTP request"
-  type        = set(object({
-                  header_name  = string
-                  header_value = optional(string)
-                }))
-  default     = []
+  type = set(object({
+    header_name  = string
+    header_value = optional(string)
+  }))
+  default = []
 }
 
 variable "protected_request_headers" {
   description = "Request headers to be added to the HTTP request"
-  type        = set(object({
-                  header_name  = string
-                  header_value = optional(string)
-                }))
-  default     = []
+  type = set(object({
+    header_name  = string
+    header_value = optional(string)
+  }))
+  default   = []
   sensitive = true
 }
 
 variable "oauth_jwt_claims" {
   description = "Additional claims to be added to the JWT sent to the OAuth token request endpoint"
-  type        = set(object({
-                  oauth_jwt_claim_name  = string
-                  oauth_jwt_claim_value = string
-                }))
-  default     = []
+  type = set(object({
+    oauth_jwt_claim_name  = string
+    oauth_jwt_claim_value = string
+  }))
+  default = []
 }
