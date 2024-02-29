@@ -1,3 +1,17 @@
+# Copyright 2024 Solace Corporation. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 provider "solacebroker" {
   username = "admin"
   password = "admin"
@@ -23,21 +37,21 @@ provider "solacebroker" {
 #   # The queue must also be enabled for ingress and egress, which is the default for the rdp_queue module
 # }
 resource "solacebroker_msg_vpn_queue" "rdp_queue" {
-  msg_vpn_name = "default"
-  queue_name   = "rdp_queue"
-  permission   = "consume"
+  msg_vpn_name    = "default"
+  queue_name      = "rdp_queue"
+  permission      = "consume"
   ingress_enabled = true
-  egress_enabled = true
+  egress_enabled  = true
 }
 
 module "testrdp" {
-  source                  = "../.."
-  
-  msg_vpn_name            = "default"
+  source = "../.."
+
+  msg_vpn_name             = "default"
   rest_delivery_point_name = "basic_rdp"
-  url                     = "https://example.com/test"
+  url                      = "https://example.com/test"
   # queue_name              = module.rdp_queue.queue.queue_name
-  queue_name              = solacebroker_msg_vpn_queue.rdp_queue.queue_name
+  queue_name = solacebroker_msg_vpn_queue.rdp_queue.queue_name
 }
 
 output "rdp" {
@@ -45,7 +59,7 @@ output "rdp" {
 }
 
 output "consumer" {
-  value = module.testrdp.rest_consumer
+  value     = module.testrdp.rest_consumer
   sensitive = true
 }
 
