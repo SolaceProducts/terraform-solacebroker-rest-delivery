@@ -6,6 +6,7 @@ output "rest_delivery_point" {
 
 output "rest_consumer" {
   value       = try(solacebroker_msg_vpn_rest_delivery_point_rest_consumer.main, null)
+  sensitive = true
 }
 
 output "queue_binding" {
@@ -14,6 +15,11 @@ output "queue_binding" {
 
 output "request_headers" {
   value       = try(solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header.main, null)
+}
+
+output "protected_request_headers" {
+  value       = try(solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header.main, null)
+  sensitive = true
 }
 
 output "oauth_jwt_claims" {

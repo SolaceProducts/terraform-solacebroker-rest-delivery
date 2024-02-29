@@ -1,10 +1,12 @@
 locals {
-  tls           = startswith(lower(var.url), "https:")
-  slashSplit    = split("/", var.url)
-  hostPortSplit = split(":", local.slashSplit[2])
-  host          = local.hostPortSplit[0]
-  port          = length(local.hostPortSplit) == 2 ? tonumber(local.hostPortSplit[1]) : (local.tls ? 443 : 80)
-  path          = "/${join("/", slice(local.slashSplit, 3, length(local.slashSplit)))}"
+  tls                    = startswith(lower(var.url), "https:")
+  slashSplit             = split("/", var.url)
+  hostPortSplit          = split(":", local.slashSplit[2])
+  host                   = local.hostPortSplit[0]
+  port                   = length(local.hostPortSplit) == 2 ? tonumber(local.hostPortSplit[1]) : (local.tls ? 443 : 80)
+  path                   = "/${join("/", slice(local.slashSplit, 3, length(local.slashSplit)))}"
+  headers_list           = tolist(var.request_headers)
+  protected_headers_list = tolist(var.protected_request_headers)
 }
 
 resource "solacebroker_msg_vpn_rest_delivery_point" "main" {
@@ -65,15 +67,25 @@ resource "solacebroker_msg_vpn_rest_delivery_point_queue_binding" "main" {
 }
 
 resource "solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header" "main" {
-
-  for_each = { for v in var.request_headers : v.header_name => v }
+  count = length(local.headers_list)
 
   msg_vpn_name             = solacebroker_msg_vpn_rest_delivery_point.main.msg_vpn_name
   rest_delivery_point_name = solacebroker_msg_vpn_rest_delivery_point.main.rest_delivery_point_name
   queue_binding_name       = solacebroker_msg_vpn_rest_delivery_point_queue_binding.main.queue_binding_name
 
-  header_name  = each.value.header_name
-  header_value = each.value.header_value
+  header_name  = local.headers_list[count.index].header_name
+  header_value = local.headers_list[count.index].header_value
+}
+
+resource "solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header" "main" {
+  count = length(local.protected_headers_list)
+
+  msg_vpn_name             = solacebroker_msg_vpn_rest_delivery_point.main.msg_vpn_name
+  rest_delivery_point_name = solacebroker_msg_vpn_rest_delivery_point.main.rest_delivery_point_name
+  queue_binding_name       = solacebroker_msg_vpn_rest_delivery_point_queue_binding.main.queue_binding_name
+
+  header_name  = local.protected_headers_list[count.index].header_name
+  header_value = local.protected_headers_list[count.index].header_value
 }
 
 resource "solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim" "main" {

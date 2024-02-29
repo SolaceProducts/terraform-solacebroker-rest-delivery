@@ -7,6 +7,7 @@ output "rest_delivery_point" {
 
 output "rest_consumer" {
   value       = try(solacebroker_msg_vpn_rest_delivery_point_rest_consumer.main, null)
+  sensitive   = true
   description = "REST Consumer objects establish HTTP connectivity to REST consumer applications who wish to receive messages from a broker."
 }
 
@@ -18,6 +19,12 @@ output "queue_binding" {
 output "request_headers" {
   value       = try(solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header.main, null)
   description = "A request header to be added to the HTTP request."
+}
+
+output "protected_request_headers" {
+  value       = try(solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header.main, null)
+  sensitive   = true
+  description = "A protected request header to be added to the HTTP request. Unlike a non-protected request header, the header value cannot be displayed after it is set."
 }
 
 output "oauth_jwt_claims" {

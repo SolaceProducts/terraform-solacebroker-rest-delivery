@@ -21,6 +21,7 @@ Important: The REST delivery point must have permission to consume messages from
 ### Optional
 
 * `request_headers` - A set of request headers to be added to the HTTP request
+* `protected_request_headers` - A set of protected request headers with sensitive value to be added to the HTTP request
 * `oauth_jwt_claims` - A set of additional claims to be added to the JWT sent to the OAuth token request endpoint
 * `rest_consumer_name` - The name of the REST consumer to be created. The default is `consumer`.
 

@@ -17,6 +17,7 @@ module "testrdp" {
   queue_name              = solacebroker_msg_vpn_queue.myqueue.queue_name
   url                     = "http://example.com/$${msgId()}"
   rest_delivery_point_name = "my_rdp"
+  enabled = false
   request_headers = [
     {
       header_name  = "header1"
@@ -25,6 +26,16 @@ module "testrdp" {
     {
       header_name  = "header2"
       header_value = "value2"
+    }
+  ]
+  protected_request_headers = [
+    {
+      header_name  = "protected_header1"
+      header_value = "protected_value1"
+    },
+    {
+      header_name  = "protected_header2"
+      header_value = "protected_value2"
     }
   ]
   oauth_jwt_claims = [
@@ -64,14 +75,22 @@ output "request_headers" {
   value = module.testrdp.request_headers
 }
 
+output "protected_request_headers" {
+  value = module.testrdp.protected_request_headers
+  sensitive = true
+}
+
 output "oauth_jwt_claims" {
   value = module.testrdp.oauth_jwt_claims
 }
 
-resource "solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header" "test" {
-  msg_vpn_name             = module.testrdp.rest_delivery_point.msg_vpn_name
-  rest_delivery_point_name = module.testrdp.rest_delivery_point.rest_delivery_point_name
-  queue_binding_name       = module.testrdp.queue_binding.queue_binding_name
-  header_name              = "protected_header1"
-  header_value             = "protected_value1"
+module "testrdp2" {
+  source                  = "../../internal/gen-template"
+  
+  msg_vpn_name            = "default"
+  queue_name              = solacebroker_msg_vpn_queue.myqueue.queue_name
+  url                     = "http://example.com/$${msgId()}"
+  rest_delivery_point_name = "my_rdp2"
+  request_headers = module.testrdp.request_headers
+  protected_request_headers = module.testrdp.protected_request_headers
 }

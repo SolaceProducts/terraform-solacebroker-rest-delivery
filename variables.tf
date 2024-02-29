@@ -239,6 +239,16 @@ variable "request_headers" {
   default = []
 }
 
+variable "protected_request_headers" {
+  description = "Request headers to be added to the HTTP request"
+  type = set(object({
+    header_name  = string
+    header_value = optional(string)
+  }))
+  default   = []
+  sensitive = true
+}
+
 variable "oauth_jwt_claims" {
   description = "Additional claims to be added to the JWT sent to the OAuth token request endpoint"
   type = set(object({
