@@ -1,6 +1,6 @@
 # Adding REST Request Headers in REST Delivery Configuration Example
 
-Configuration in this directory demonstrates how to specify [request headers](https://docs.solace.com/Services/Managing-RDPs.htm#configuring-request-headers) when configuring [REST messaging](https://docs.solace.com/API/REST/REST-Consumers.htm) on the PubSub+ event broker, leveraging the Rest Delivery Terraform module.
+Configuration in this directory demonstrates how to specify [request headers](https://docs.solace.com/Services/Managing-RDPs.htm#configuring-request-headers) when configuring [REST messaging](https://docs.solace.com/API/REST/REST-Consumers.htm) on the PubSub+ event broker, leveraging the REST Delivery Terraform module.
 
 There are two types of request header resources:
 
@@ -44,6 +44,9 @@ This example will create following resources:
 * `solacebroker_msg_vpn_rest_delivery_point`
 * `solacebroker_msg_vpn_rest_delivery_point_rest_consumer`
 * `solacebroker_msg_vpn_rest_delivery_point_queue_binding`
+* `solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header`
+* `solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header`
+
 
 ## Running the Example
 
@@ -57,7 +60,7 @@ The sample is available from the module GitHub repo:
 
 ```bash
 git clone https://github.com/SolaceProducts/terraform-solacebroker-rest-delivery.git
-cd examples/basic
+cd examples/adding-headers
 ```
 
 ### Adjust Provider Configuration

@@ -1,6 +1,6 @@
 # Using Substitution Expressions in REST Delivery Configuration Example
 
-Configuration in this directory creates a [REST delivery point and child objects](https://docs.solace.com/API/REST/REST-Consumers.htm#_Toc433874658) on the PubSub+ event broker, leveraging the Rest Delivery Terraform module.
+Configuration in this directory creates a [REST delivery point and child objects](https://docs.solace.com/API/REST/REST-Consumers.htm#_Toc433874658) on the PubSub+ event broker, leveraging the REST Delivery Terraform module.
 
 It demonstrates the use of [substitution expressions](https://docs.solace.com/Messaging/Substitution-Expressions-Overview.htm) for flexible REST requests.
 
@@ -57,7 +57,7 @@ The sample is available from the module GitHub repo:
 
 ```bash
 git clone https://github.com/SolaceProducts/terraform-solacebroker-rest-delivery.git
-cd examples/basic
+cd examples/using-substitution-expressions
 ```
 
 ### Adjust Provider Configuration

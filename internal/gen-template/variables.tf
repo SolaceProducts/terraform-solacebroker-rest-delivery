@@ -25,9 +25,9 @@ variable "queue_name" {
 # Optional variables
 
 variable "enabled" {
-  description = "Enable or disable the REST Delivery Point."
+  description = "Enable or disable the REST Delivery Point and the underlying REST Consumer."
   type        = bool
-  default     = null
+  default     = true
 }
 
 variable "rest_consumer_name" {

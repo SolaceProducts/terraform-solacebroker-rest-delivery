@@ -1,4 +1,4 @@
-# Solace PubSub+ Software Event Broker Rest Delivery Terraform Module
+# Solace PubSub+ Software Event Broker REST Delivery Terraform Module
 
 Terraform module to support the setup of a [REST consumer](https://docs.solace.com/API/REST/REST-Consumers.htm) on the [Solace PubSub+ Event Broker](https://solace.com/products/event-broker/).
 
