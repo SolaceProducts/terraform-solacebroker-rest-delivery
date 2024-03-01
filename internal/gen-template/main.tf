@@ -3,7 +3,7 @@ locals {
   slashSplit             = split("/", var.url)
   isIpV6HostPort         = length(split("]", local.slashSplit[2])) == 2
   hostPortSplit          = local.isIpV6HostPort ? split("]:", trimprefix(local.slashSplit[2], "[")) : split(":", local.slashSplit[2])
-  host                   = local.hostPortSplit[0]
+  host                   = trimsuffix(local.hostPortSplit[0], "]")
   port                   = length(local.hostPortSplit) == 2 ? tonumber(local.hostPortSplit[1]) : (local.tls ? 443 : 80)
   path                   = "/${join("/", slice(local.slashSplit, 3, length(local.slashSplit)))}"
   headers_list           = tolist(var.request_headers)
