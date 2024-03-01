@@ -62,10 +62,6 @@ output "protected_request_headers" {
   sensitive = true
 }
 
-output "oauth_jwt_claims" {
-  value = module.testrdp.oauth_jwt_claims
-}
-
 module "testrdp2" {
   source = "../../internal/gen-template"
 
