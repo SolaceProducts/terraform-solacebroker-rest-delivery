@@ -18,7 +18,7 @@ Adding extra OAuth JWT claims to the REST consumer is not supported in the curre
 
 * `msg_vpn_name` - REST delivery points are specific to a Message VPN on the broker.
 * `rest_delivery_point_name` - The name of the REST delivery point to be created.
-* `url` - The REST consumer destination URL including base URL and endpoint path. The path portion of the URL may contain [substitution expressions](https://docs.solace.com/Messaging/Substitution-Expressions-Overview.htm).
+* `url` - The REST consumer destination URL including base URL and endpoint path. The path portion of the URL may contain [substitution expressions](https://docs.solace.com/Messaging/Substitution-Expressions-Overview.htm). To specify an IPv6 address with port, the required format is the address to be [enclosed in square brackets](https://www.rfc-editor.org/rfc/rfc3986.html#section-3.2.2).
 * `queue_name` - The name of the queue to bind to.
 
 Important: The REST delivery point must have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to `#rdp/<rest_delivery_point_name>` or the queue’s permissions for non-owner clients must be set to at least `consume` level access. Queue ingress and egress must also be enabled.

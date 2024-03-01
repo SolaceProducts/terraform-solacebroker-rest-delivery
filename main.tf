@@ -15,7 +15,8 @@
 locals {
   tls                    = startswith(lower(var.url), "https:")
   slashSplit             = split("/", var.url)
-  hostPortSplit          = split(":", local.slashSplit[2])
+  isIpV6HostPort         = length(split("]", local.slashSplit[2])) == 2
+  hostPortSplit          = local.isIpV6HostPort ? split("]:", trimprefix(local.slashSplit[2], "[")) : split(":", local.slashSplit[2])
   host                   = local.hostPortSplit[0]
   port                   = length(local.hostPortSplit) == 2 ? tonumber(local.hostPortSplit[1]) : (local.tls ? 443 : 80)
   path                   = "/${join("/", slice(local.slashSplit, 3, length(local.slashSplit)))}"
