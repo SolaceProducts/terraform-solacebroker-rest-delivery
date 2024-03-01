@@ -10,6 +10,10 @@ variable "msg_vpn_name" {
 variable "url" {
   description = "The URL that the messages should be delivered to. The path portion of the URL may contain substitution expressions"
   type        = string
+  validation {
+    condition     = can(regex("https?://.*", var.url))
+    error_message = "The URL must be a valid URL"
+  }
 }
 
 variable "rest_delivery_point_name" {
@@ -25,7 +29,7 @@ variable "queue_name" {
 # Optional variables
 
 variable "enabled" {
-  description = "Enable or disable the REST Delivery Point and the underlying REST Consumer."
+  description = "Enable or disable the REST Delivery Point and the underlying REST Consumer"
   type        = bool
   default     = true
 }
@@ -55,13 +59,4 @@ variable "protected_request_headers" {
   }))
   default   = []
   sensitive = true
-}
-
-variable "oauth_jwt_claims" {
-  description = "Additional claims to be added to the JWT sent to the OAuth token request endpoint"
-  type = set(object({
-    oauth_jwt_claim_name  = string
-    oauth_jwt_claim_value = string
-  }))
-  default = []
 }
