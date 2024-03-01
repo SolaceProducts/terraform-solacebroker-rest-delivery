@@ -38,24 +38,6 @@ module "testrdp" {
       header_value = "protected_value2"
     }
   ]
-  oauth_jwt_claims = [
-    {
-      oauth_jwt_claim_name  = "scope"
-      oauth_jwt_claim_value = "\"https://www.googleapis.com/auth/pubsub\""
-    },
-    {
-      oauth_jwt_claim_name  = "aud"
-      oauth_jwt_claim_value = "\"https://www.googleapis.com/oauth2/v4/token\""
-    },
-    {
-      oauth_jwt_claim_name  = "iss"
-      oauth_jwt_claim_value = "\"111400995554822290197\""
-    },
-    {
-      oauth_jwt_claim_name  = "sub"
-      oauth_jwt_claim_value = "\"111400995554822290197\""
-    }
-  ]
 }
 
 output "rdp" {

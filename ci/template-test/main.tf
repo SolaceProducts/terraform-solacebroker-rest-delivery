@@ -15,7 +15,7 @@ module "testrdp" {
 
   msg_vpn_name             = "default"
   queue_name               = solacebroker_msg_vpn_queue.myqueue.queue_name
-  url                      = "http://example.com/$${msgId()}"
+  url                      = "https://example.com"
   rest_delivery_point_name = "my_rdp"
   enabled                  = false
   request_headers = [
@@ -36,24 +36,6 @@ module "testrdp" {
     {
       header_name  = "protected_header2"
       header_value = "protected_value2"
-    }
-  ]
-  oauth_jwt_claims = [
-    {
-      oauth_jwt_claim_name  = "scope"
-      oauth_jwt_claim_value = "\"https://www.googleapis.com/auth/pubsub\""
-    },
-    {
-      oauth_jwt_claim_name  = "aud"
-      oauth_jwt_claim_value = "\"https://www.googleapis.com/oauth2/v4/token\""
-    },
-    {
-      oauth_jwt_claim_name  = "iss"
-      oauth_jwt_claim_value = "\"111400995554822290197\""
-    },
-    {
-      oauth_jwt_claim_name  = "sub"
-      oauth_jwt_claim_value = "\"111400995554822290197\""
     }
   ]
 }

@@ -59,14 +59,3 @@ resource "solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_reque
   header_name  = local.protected_headers_list[count.index].header_name
   header_value = local.protected_headers_list[count.index].header_value
 }
-
-resource "solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim" "main" {
-  for_each = { for v in var.oauth_jwt_claims : v.oauth_jwt_claim_name => v }
-
-  msg_vpn_name             = solacebroker_msg_vpn_rest_delivery_point.main.msg_vpn_name
-  rest_delivery_point_name = solacebroker_msg_vpn_rest_delivery_point.main.rest_delivery_point_name
-  rest_consumer_name       = solacebroker_msg_vpn_rest_delivery_point_rest_consumer.main.rest_consumer_name
-
-  oauth_jwt_claim_name  = each.value.oauth_jwt_claim_name
-  oauth_jwt_claim_value = each.value.oauth_jwt_claim_value
-}

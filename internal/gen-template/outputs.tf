@@ -21,7 +21,3 @@ output "protected_request_headers" {
   value     = try(solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header.main, null)
   sensitive = true
 }
-
-output "oauth_jwt_claims" {
-  value = try(solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim.main, null)
-}

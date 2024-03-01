@@ -24,6 +24,10 @@ variable "msg_vpn_name" {
 variable "url" {
   description = "The URL that the messages should be delivered to. The path portion of the URL may contain substitution expressions"
   type        = string
+  validation {
+    condition     = can(regex("https?://.*", var.url))
+    error_message = "The URL must be a valid URL"
+  }
 }
 
 variable "rest_delivery_point_name" {
@@ -39,7 +43,7 @@ variable "queue_name" {
 # Optional variables
 
 variable "enabled" {
-  description = "Enable or disable the REST Delivery Point and the underlying REST Consumer."
+  description = "Enable or disable the REST Delivery Point and the underlying REST Consumer"
   type        = bool
   default     = true
 }
@@ -51,194 +55,194 @@ variable "rest_consumer_name" {
 }
 
 variable "authentication_aws_access_key_id" {
-  description = "The AWS access key id."
+  description = "The AWS access key id"
   type        = string
   default     = null
 }
 
 variable "authentication_aws_region" {
-  description = "The AWS region id."
+  description = "The AWS region id"
   type        = string
   default     = null
 }
 
 variable "authentication_aws_secret_access_key" {
-  description = "The AWS secret access key."
+  description = "The AWS secret access key"
   type        = string
   default     = null
   sensitive   = true
 }
 
 variable "authentication_aws_service" {
-  description = "The AWS service id."
+  description = "The AWS service id"
   type        = string
   default     = null
 }
 
 variable "authentication_client_cert_content" {
-  description = "The PEM formatted content for the client certificate that the REST Consumer will present to the REST host."
+  description = "The PEM formatted content for the client certificate that the REST Consumer will present to the REST host"
   type        = string
   default     = null
   sensitive   = true
 }
 
 variable "authentication_client_cert_password" {
-  description = "The password for the client certificate."
+  description = "The password for the client certificate"
   type        = string
   default     = null
   sensitive   = true
 }
 
 variable "authentication_http_basic_password" {
-  description = "The password for the username."
+  description = "The password for the username"
   type        = string
   default     = null
   sensitive   = true
 }
 
 variable "authentication_http_basic_username" {
-  description = "The username that the REST Consumer will use to login to the REST host."
+  description = "The username that the REST Consumer will use to login to the REST host"
   type        = string
   default     = null
 }
 
 variable "authentication_http_header_name" {
-  description = "The authentication header name."
+  description = "The authentication header name"
   type        = string
   default     = null
 }
 
 variable "authentication_http_header_value" {
-  description = "The authentication header value."
+  description = "The authentication header value"
   type        = string
   default     = null
   sensitive   = true
 }
 
 variable "authentication_oauth_client_id" {
-  description = "The OAuth client ID."
+  description = "The OAuth client ID"
   type        = string
   default     = null
 }
 
 variable "authentication_oauth_client_scope" {
-  description = "The OAuth scope."
+  description = "The OAuth scope"
   type        = string
   default     = null
 }
 
 variable "authentication_oauth_client_secret" {
-  description = "The OAuth client secret."
+  description = "The OAuth client secret"
   type        = string
   default     = null
   sensitive   = true
 }
 
 variable "authentication_oauth_client_token_endpoint" {
-  description = "The OAuth token endpoint URL that the REST Consumer will use to request a token for login to the REST host."
+  description = "The OAuth token endpoint URL that the REST Consumer will use to request a token for login to the REST host"
   type        = string
   default     = null
 }
 
 variable "authentication_oauth_client_token_expiry_default" {
-  description = "The default expiry time for a token, in seconds."
+  description = "The default expiry time for a token, in seconds"
   type        = number
   default     = null
 }
 
 variable "authentication_oauth_jwt_secret_key" {
-  description = "The OAuth secret key used to sign the token request JWT."
+  description = "The OAuth secret key used to sign the token request JWT"
   type        = string
   default     = null
   sensitive   = true
 }
 
 variable "authentication_oauth_jwt_token_endpoint" {
-  description = "The OAuth token endpoint URL that the REST Consumer will use to request a token for login to the REST host."
+  description = "The OAuth token endpoint URL that the REST Consumer will use to request a token for login to the REST host"
   type        = string
   default     = null
 }
 
 variable "authentication_oauth_jwt_token_expiry_default" {
-  description = "The default expiry time for a token, in seconds."
+  description = "The default expiry time for a token, in seconds"
   type        = number
   default     = null
 }
 
 variable "authentication_scheme" {
-  description = "The authentication scheme used by the REST Consumer to login to the REST host."
+  description = "The authentication scheme used by the REST Consumer to login to the REST host"
   type        = string
   default     = null
 }
 
 variable "client_profile_name" {
-  description = "The Client Profile of the REST Delivery Point."
+  description = "The Client Profile of the REST Delivery Point"
   type        = string
   default     = null
 }
 
 variable "gateway_replace_target_authority_enabled" {
-  description = "Enable or disable whether the authority for the request-target is replaced with that configured for the REST Consumer remote."
+  description = "Enable or disable whether the authority for the request-target is replaced with that configured for the REST Consumer remote"
   type        = bool
   default     = null
 }
 
 variable "http_method" {
-  description = "The HTTP method to use (POST or PUT)."
+  description = "The HTTP method to use (POST or PUT)"
   type        = string
   default     = null
 }
 
 variable "local_interface" {
-  description = "The interface that will be used for all outgoing connections associated with the REST Consumer."
+  description = "The interface that will be used for all outgoing connections associated with the REST Consumer"
   type        = string
   default     = null
 }
 
 variable "max_post_wait_time" {
-  description = "The maximum amount of time (in seconds) to wait for an HTTP POST response from the REST Consumer."
+  description = "The maximum amount of time (in seconds) to wait for an HTTP POST response from the REST Consumer"
   type        = number
   default     = null
 }
 
 variable "outgoing_connection_count" {
-  description = "The number of concurrent TCP connections open to the REST Consumer."
+  description = "The number of concurrent TCP connections open to the REST Consumer"
   type        = number
   default     = null
 }
 
 variable "proxy_name" {
-  description = "The name of the proxy to use."
+  description = "The name of the proxy to use"
   type        = string
   default     = null
 }
 
 variable "request_target_evaluation" {
-  description = "The type of evaluation to perform on the request target."
+  description = "The type of evaluation to perform on the request target"
   type        = string
   default     = null
 }
 
 variable "retry_delay" {
-  description = "The number of seconds that must pass before retrying the remote REST Consumer connection."
+  description = "The number of seconds that must pass before retrying the remote REST Consumer connection"
   type        = number
   default     = null
 }
 
 variable "service" {
-  description = "The name of the service that this REST Delivery Point connects to."
+  description = "The name of the service that this REST Delivery Point connects to"
   type        = string
   default     = null
 }
 
 variable "tls_cipher_suite_list" {
-  description = "The colon-separated list of cipher suites the REST Consumer uses in its encrypted connection."
+  description = "The colon-separated list of cipher suites the REST Consumer uses in its encrypted connection"
   type        = string
   default     = null
 }
 
 variable "vendor" {
-  description = "The name of the vendor that this REST Delivery Point connects to."
+  description = "The name of the vendor that this REST Delivery Point connects to"
   type        = string
   default     = null
 }
@@ -261,14 +265,5 @@ variable "protected_request_headers" {
   }))
   default   = []
   sensitive = true
-}
-
-variable "oauth_jwt_claims" {
-  description = "Additional claims to be added to the JWT sent to the OAuth token request endpoint"
-  type = set(object({
-    oauth_jwt_claim_name  = string
-    oauth_jwt_claim_value = string
-  }))
-  default = []
 }
 

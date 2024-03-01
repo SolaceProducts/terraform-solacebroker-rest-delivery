@@ -17,12 +17,10 @@ Specific use case details are provided in the [Examples](#examples).
 
 Important: The REST delivery point must have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to `#rdp/<rest_delivery_point_name>` or the queue’s permissions for non-owner clients must be set to at least `consume` level access. Queue ingress and egress must also be enabled.
 
-
 ### Optional
 
 * `request_headers` - A set of request headers to be added to the HTTP request
 * `protected_request_headers` - A set of protected request headers with sensitive value to be added to the HTTP request
-* `oauth_jwt_claims` - A set of additional claims to be added to the JWT sent to the OAuth token request endpoint
 * `rest_consumer_name` - The name of the REST consumer to be created. The default is `consumer`.
 
 Additional optional module variables names are the same as the underlying resource attributes. The recommended approach to determine variable name mappings is to look up the resource's documentation for matching attribute names:
@@ -34,11 +32,12 @@ Additional optional module variables names are the same as the underlying resour
 |[solacebroker_msg_vpn_rest_delivery_point_queue_binding](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_queue_binding#optional)|
 |[solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_queue_binding_request_header#optional)|
 |[solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_queue_binding_protected_request_header#optional)|
-|[solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim#optional)|
 
 Most optional variables' default value is `null`, meaning that if not provided then the resource default value will be provisioned on the broker.
 
 -> The module default for the `enabled` optional variable is `true`, which differ from the resource attribute default.
+
+Note: extra claims to be added to the JWT sent to the OAuth token request endpoint, are not supported in the current module. Support will be added in a future release.
 
 ## Module outputs
 
@@ -63,7 +62,6 @@ The following table shows the resources created. "X" denotes a resource always c
 | solacebroker_msg_vpn_rest_delivery_point_queue_binding | X |
 | solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header | O |
 | solacebroker_msg_vpn_rest_delivery_point_queue_binding_protected_request_header | O |
-| solacebroker_msg_vpn_rest_delivery_point_rest_consumer_oauth_jwt_claim | O |
 
 ## Examples
 
@@ -72,11 +70,7 @@ Refer to the following configuration examples:
 - [Basic](examples/basic)
 - [Substitution Expressions](examples/using-substitution-expressions)
 - [Adding headers](examples/adding-headers)
-- [Adding JWT claims (workaround)](examples/adding-oauth-jwt-claims-workaround)
 - [Multiple queue bindings](examples/multiple-queue-bindings)
-- [Amazon AWS consumer](examples/aws)
-- [Microsoft Azure consumer](examples/azure)
-- [Google Cloud consumer](examples/gcp)
 
 ## Module use recommendations
 
