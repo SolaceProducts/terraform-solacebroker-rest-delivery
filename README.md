@@ -6,6 +6,12 @@ Given a queue on the broker, as a destination for messages to be forwarded to a 
 
 Specific use case details are provided in the [Examples](#examples).
 
+## Limitations
+
+This module only supports one queue binding per REST delivery point. Configure a new REST delivery point using the module for an additional queue.
+
+Adding extra OAuth JWT claims to the REST consumer is not supported in the current module. Support will be added in a later release.
+
 ## Module input variables
 
 ### Required
@@ -37,8 +43,6 @@ Most optional variables' default value is `null`, meaning that if not provided t
 
 -> The module default for the `enabled` optional variable is `true`, which differ from the resource attribute default.
 
-Note: extra claims to be added to the JWT sent to the OAuth token request endpoint, are not supported in the current module. Support will be added in a future release.
-
 ## Module outputs
 
 [Module outputs](https://developer.hashicorp.com/terraform/language/values/outputs) provide reference to created resources. Any reference to a resource that has not been created will be set to `(null)`.
@@ -68,9 +72,8 @@ The following table shows the resources created. "X" denotes a resource always c
 Refer to the following configuration examples:
 
 - [Basic](examples/basic)
-- [Substitution Expressions](examples/using-substitution-expressions)
+- [Substitution expressions](examples/using-substitution-expressions)
 - [Adding headers](examples/adding-headers)
-- [Multiple queue bindings](examples/multiple-queue-bindings)
 
 ## Module use recommendations
 
