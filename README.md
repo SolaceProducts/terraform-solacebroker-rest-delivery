@@ -25,6 +25,7 @@ Important: The REST delivery point must have permission to consume messages from
 
 ### Optional
 
+* `client_profile_name` - the [client profile associated](https://docs.solace.com/Services/Managing-RDPs.htm#associating-client-profiles-with-REST-delivery-points). If not provided, the `default` client profile for the Message VPN will be associated.
 * `request_headers` - A set of request headers to be added to the HTTP request
 * `protected_request_headers` - A set of protected request headers with sensitive value to be added to the HTTP request
 * `rest_consumer_name` - The name of the REST consumer to be created. The default is `consumer`.
