@@ -91,11 +91,15 @@ jobs:
           exit 1 // force actions stop here
 
       - name: Create release branch starting point
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git fetch
           git push origin refs/remotes/origin/${{ github.event.inputs.prev_branch_name }}:refs/heads/${{ github.event.inputs.release_branch_name }}
 
       - name: Create PR to release branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           CURRENT_BRANCH=${GITHUB_REF_NAME}
           gh pr create -B ${{ github.event.inputs.release_branch_name }} --title "New release ${{ github.event.inputs.release_branch_name }}" --body 'Created by Github action'
