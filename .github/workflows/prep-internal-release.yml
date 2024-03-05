@@ -93,8 +93,7 @@ jobs:
       - name: Create release branch starting point
         run: |
           git fetch
-          git branch -a
-          git push origin refs/remotes/origin/${{ github.event.inputs.prev_branch_name }}:${{ github.event.inputs.release_branch_name }}
+          git push origin refs/remotes/origin/${{ github.event.inputs.prev_branch_name }}:refs/heads/${{ github.event.inputs.release_branch_name }}
 
       - name: Create PR to release branch
         run: |
