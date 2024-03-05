@@ -1,7 +1,7 @@
 locals {
   tls                    = startswith(lower(var.url), "https:")
   slashSplit             = split("/", var.url)
-  isIpV6HostWithPort         = length(split("]", local.slashSplit[2])) == 2
+  isIpV6HostWithPort     = length(split("]", local.slashSplit[2])) == 2
   isIpV6NoPort           = local.isIpV6HostWithPort ? false : length(split(":", local.slashSplit[2])) > 2
   address                = local.isIpV6NoPort ? join(local.slashSplit[2], ["[", "]"]) : local.slashSplit[2]
   hostPortSplit          = local.isIpV6HostWithPort || local.isIpV6NoPort ? split("]:", trimprefix(local.address, "[")) : split(":", local.address)
