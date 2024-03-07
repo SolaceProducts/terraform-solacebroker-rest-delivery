@@ -12,6 +12,7 @@ resource "solacebroker_msg_vpn_queue" "myqueue" {
 
 module "testrdp" {
   source = "../.."
+  # version = ""
 
   msg_vpn_name             = "default"
   queue_name               = solacebroker_msg_vpn_queue.myqueue.queue_name
