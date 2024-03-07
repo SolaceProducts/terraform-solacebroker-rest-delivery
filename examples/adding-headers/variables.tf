@@ -18,4 +18,5 @@ variable "protected_request_headers" {
     header_value = string
   }))
   default = []
+  sensitive = true
 }
