@@ -67,7 +67,7 @@ module "testrdp2" {
 
   msg_vpn_name              = "default"
   queue_name                = solacebroker_msg_vpn_queue.myqueue.queue_name
-  url                       = "http://[2001:db8:3333:4444:5555:6666:7777:8888]:12345/$${msgId()}"
+  url                       = "HTTP://[2001:db8:3333:4444:5555:6666:7777:8888]:12345/$${msgId()}"
   rest_delivery_point_name  = "my_rdp2"
   request_headers           = module.testrdp.request_headers
   protected_request_headers = module.testrdp.protected_request_headers
