@@ -66,6 +66,7 @@ output "protected_request_headers" {
 
 module "testrdp2" {
   source = "../../internal/gen-template"
+  # version = ""
 
   msg_vpn_name              = "default"
   queue_name                = solacebroker_msg_vpn_queue.myqueue.queue_name
