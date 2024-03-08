@@ -78,7 +78,7 @@ Refer to the following configuration examples:
 
 ## Module use recommendations
 
-This module is expected to be used primarily by application teams. It supports provisioning endpoints or templates required by a specific application. It may be forked and adjusted with private defaults.
+This module is expected to be used primarily by application teams. It supports provisioning rest delivery required by a specific application. It may be forked and adjusted with private defaults.
 
 ## Resources
 

@@ -11,7 +11,7 @@ variable "url" {
   description = "The URL that the messages should be delivered to. The path portion of the URL may contain substitution expressions"
   type        = string
   validation {
-    condition     = can(regex("https?://.*", var.url))
+    condition     = can(regex("https?://.*", lower(var.url)))
     error_message = "The URL must be a valid URL"
   }
 }
