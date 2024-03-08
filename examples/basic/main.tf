@@ -51,7 +51,7 @@ module "testrdp" {
   rest_delivery_point_name = "basic_rdp"
   url                      = "https://example.com/test"
   # queue_name               = module.rdp_queue.queue.queue_name
-  queue_name               = solacebroker_msg_vpn_queue.rdp_queue.queue_name
+  queue_name = solacebroker_msg_vpn_queue.rdp_queue.queue_name
 
   # Example configuration of a client profile. Commented out here since the "default" client profile will be used if not specified
   # client_profile_name      = "default"
