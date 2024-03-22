@@ -27,7 +27,7 @@ Important: The REST delivery point must have permission to consume messages from
 
 Note that substitution expressions are not supported for `protected_request_headers`.
 
-Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_queue"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_queue#optional).
+Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_rest_delivery_point_rest_consumer"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_rest_consumer#optional).
 
 The module default for the `enabled` variable is true, which enables both the RDP and the REST consumer resources.
 

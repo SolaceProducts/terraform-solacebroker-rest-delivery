@@ -74,8 +74,11 @@ jobs:
 
       - name: Ensure version reflects release candidate version
         run: |
-          VERSION=$(echo "${GITHUB_REF_NAME}" | cut -d'v' -f2)
-          echo $VERSION > VERSION
+          # only if ${GITHUB_REF_NAME} starts with 'v' or 'dev' and followed by a semver
+          if [[ $GITHUB_REF_NAME =~ ^(v|dev)[0-9]+\.[0-9]+\.[0-9]+.*$ ]]; then
+            VERSION=$(echo "${GITHUB_REF_NAME}" | cut -d'v' -f2)
+            echo $VERSION > VERSION
+          fi
 
       - name: Check changed files
         uses: tj-actions/verify-changed-files@v17
