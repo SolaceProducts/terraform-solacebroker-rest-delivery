@@ -16,7 +16,7 @@ Strings containing substitution expressions must be [properly escaped](https://d
 
 * `msg_vpn_name` - set to `default` in the example
 * `rest_delivery_point_name`
-* `url` - set to `http://example.com/$${msgId()}` in the example. Notice the escape sequence, which results in `${msgId()` configured on the broker. Substitution expressions are only suported in the path component.
+* `url` - set to `http://example.com/$${msgId()}` in the example. Notice the escape sequence, which results in `${msgId()}` configured on the broker. Substitution expressions are only suported in the path component.
 * `queue_name` - `rdp_queue`, the queue that has been created to be used with the RDP
 
 Important: The REST delivery point must have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to `#rdp/<rest_delivery_point_name>` or the queue’s permissions for non-owner clients must be set to at least `consume` level access. Queue ingress and egress must also be enabled.
@@ -27,13 +27,13 @@ Important: The REST delivery point must have permission to consume messages from
 
 Note that substitution expressions are not supported for `protected_request_headers`.
 
-Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_queue"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_queue#optional).
+Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_rest_delivery_point_rest_consumer"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_rest_consumer#optional).
 
 The module default for the `enabled` variable is true, which enables both the RDP and the REST consumer resources.
 
 ### Output
 
-The module `rdp` output refers to the created REST delivery point.
+The module `rdp`, `consumer` and `queue_binding` outputs refer to the created REST delivery point, REST consumer and queue binding.
 
 ## Created resources
 
@@ -44,6 +44,7 @@ This example will create following resources:
 * `solacebroker_msg_vpn_rest_delivery_point`
 * `solacebroker_msg_vpn_rest_delivery_point_rest_consumer`
 * `solacebroker_msg_vpn_rest_delivery_point_queue_binding`
+* `solacebroker_msg_vpn_rest_delivery_point_queue_binding_request_header`
 
 ## Running the Example
 

@@ -27,13 +27,13 @@ Important: The REST delivery point must have permission to consume messages from
 * `request_headers` - provided as a set of objects in the example. Also check the [using-substitution-expressions](/examples/using-substitution-expressions) example for additional samples.
 * `protected_request_headers` - provided as a set of objects in the example
 
-Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_queue"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_queue#optional).
+Optional module input variables have the same name as the attributes of the underlying provider resource. If omitted then the default for the related resource attribute will be configured on the broker. For attributes and defaults, refer to the [documentation of "solacebroker_msg_vpn_rest_delivery_point_queue_binding"](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest/docs/resources/msg_vpn_rest_delivery_point_queue_binding#optional).
 
 The module default for the `enabled` variable is true, which enables both the RDP and the REST consumer resources.
 
 ### Output
 
-The module `rdp` output refers to the created REST delivery point.
+The module `rdp`, `consumer` and `queue_binding` outputs refer to the created REST delivery point, REST consumer and queue binding.
 
 ## Created resources
 
