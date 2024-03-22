@@ -21,7 +21,7 @@ The module default for the `enabled` variable is true, which enables both the RD
 
 ### Output
 
-The module `rdp` output refers to the created REST delivery point.
+The module `rdp`, `consumer` and `queue_binding` outputs refer to the created REST delivery point, REST consumer and queue binding.
 
 ## Created resources
 
