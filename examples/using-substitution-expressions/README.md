@@ -16,7 +16,7 @@ Strings containing substitution expressions must be [properly escaped](https://d
 
 * `msg_vpn_name` - Set to `default` in the example.
 * `rest_delivery_point_name`
-* `url` - Set to `http://example.com/$${msgId()}` in the example. Notice the escape sequence, which results in `${msgId()}` configured on the broker. Substitution expressions are only suported in the path component.
+* `url` - Set to `http://example.com/$${msgId()}` in the example. Notice the escape sequence, which results in `${msgId()}` configured on the broker. Substitution expressions are only supported in the path component.
 * `queue_name` - Set to `rdp_queue`, the queue that has been created to be used with the RDP.
 
 Important: The REST delivery point must have permission to consume messages from the queue — to achieve this, the queue’s owner must be set to `#rdp/<rest_delivery_point_name>` or the queue’s permissions for non-owner clients must be set to at least `consume` level access. Queue ingress and egress must also be enabled.
