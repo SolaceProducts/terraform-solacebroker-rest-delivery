@@ -54,7 +54,7 @@ Note that the "rest consumer" and the "protected request headers" outputs are [s
 
 | Name | Version |
 |------|---------|
-| <a name="provider_solacebroker"></a> [solacebroker](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest) | >= 1.0 |
+| <a name="provider_solacebroker"></a> [solacebroker](https://registry.terraform.io/providers/SolaceProducts/solacebroker/latest) | >= 1.1 |
 
 ## Resources
 
